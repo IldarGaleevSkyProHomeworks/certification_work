@@ -10,6 +10,8 @@ class SupplierTypeEnum(models.IntegerChoices):
 
 
 class Supplier(models.Model):
+    MAX_CHAIN_LENGTH = 5
+
     name = models.CharField(
         max_length=150,
         verbose_name="Название",
@@ -42,6 +44,31 @@ class Supplier(models.Model):
         choices=SupplierTypeEnum.choices,
         verbose_name="Тип поставщика",
     )
+
+    @property
+    def hierarchy_level(self) -> int | None:
+        """
+        returns chain length or None if chain
+        greater than MAX_CHAIN_LENGTH or does not end with the MANUFACTURER
+        """
+
+        attr_name = '__h_level'
+        if hasattr(self, attr_name):
+            return getattr(self, attr_name, int | None)
+
+        result = 0
+        chain = self
+        while chain and chain.supplier_type != SupplierTypeEnum.MANUFACTURER:
+            result += 1
+            chain = chain.supplier
+            if not chain or result > self.MAX_CHAIN_LENGTH:
+                result = None
+                break
+
+        setattr(self, attr_name, result)
+        return result
+
+    hierarchy_level.fget.short_description = "Уровень иерархии"
 
     def __str__(self):
         return self.name
