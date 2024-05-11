@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "certification-work"
+version = "0.1.0"
+description = ""
+authors = ["Галеев Ильдар <ildar-galeev92@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^3"
+djangorestframework = "^3.10"
+psycopg2 = { version = "^2.7.5", markers = "sys_platform=='win32'" }
+psycopg2-binary = [
+    { version = "^2.7.5", markers = "sys_platform=='linux'" },
+    { version = "^2.7.5", markers = "sys_platform=='darwin'" }
+]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
