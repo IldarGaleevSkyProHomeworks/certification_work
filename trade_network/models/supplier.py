@@ -31,6 +31,20 @@ class Supplier(models.Model):
         verbose_name="Дата создания",
     )
 
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return (
+            f"{self.__class__.__name__}("
+            f"pk={self.pk},"
+            f"name={self.name},"
+            f"supplier={self.supplier},"
+            f"debt={self.debt},"
+            f"creation_date_time={self.creation_date_time},"
+            f")"
+        )
+
     class Meta:
         verbose_name = "Поставщик"
         verbose_name_plural = "Поставщики"
