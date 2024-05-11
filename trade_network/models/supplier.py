@@ -3,6 +3,12 @@ from django.core.validators import MinValueValidator
 from django.db import models
 
 
+class SupplierTypeEnum(models.IntegerChoices):
+    MANUFACTURER = (0, "Завод")
+    RETAIL_NETWORK = (1, "Розничная сеть")
+    INDIVIDUAL_ENTREPRENEUR = (2, "Частный предприниматель")
+
+
 class Supplier(models.Model):
     name = models.CharField(
         max_length=150,
@@ -29,6 +35,12 @@ class Supplier(models.Model):
     creation_date_time = models.DateTimeField(
         auto_now=True,
         verbose_name="Дата создания",
+    )
+
+    supplier_type = models.IntegerField(
+        default=SupplierTypeEnum.MANUFACTURER,
+        choices=SupplierTypeEnum.choices,
+        verbose_name="Тип поставщика",
     )
 
     def __str__(self):
