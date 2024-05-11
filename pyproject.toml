@@ -16,6 +16,13 @@ psycopg2-binary = [
 ]
 
 
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+
+[tool.black]
+line-length = 79
+skip-string-normalization = true
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
