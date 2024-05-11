@@ -30,3 +30,7 @@ class Supplier(models.Model):
         auto_now=True,
         verbose_name="Дата создания",
     )
+
+    class Meta:
+        verbose_name = "Поставщик"
+        verbose_name_plural = "Поставщики"

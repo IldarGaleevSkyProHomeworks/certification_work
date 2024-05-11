@@ -31,3 +31,7 @@ class Contact(models.Model):
         max_length=10,
         verbose_name="Номер дома",
     )
+
+    class Meta:
+        verbose_name = "Контакт"
+        verbose_name_plural = "Контакты"

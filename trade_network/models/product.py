@@ -14,8 +14,7 @@ class Product(models.Model):
     )
 
     release_date = models.DateField(
-        auto_now=False,
-        verbose_name="Дата выхода продукта на рынок"
+        auto_now=False, verbose_name="Дата выхода продукта на рынок"
     )
 
     dealers = models.ManyToManyField(
@@ -23,3 +22,7 @@ class Product(models.Model):
         related_name="products",
         verbose_name="Дилеры",
     )
+
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
